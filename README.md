@@ -1,4 +1,4 @@
-# recipe_app_2_vue
+# Monero Trading App
 
 ## Project setup
 ```

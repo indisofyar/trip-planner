@@ -1,6 +1,6 @@
 <template>
   <div :class="{ 'stop-moving': ($store.state.selectedPopup != null) }">
-    <nav class="navbar navbar-expand-lg navbar-dark black-background px-2"
+    <nav class="navbar navbar-expand-lg black-background navbar-dark px-2"
       style="position: fixed; width: 100%; z-index: 10; height: 64px;">
       <div class="container-fluid p-1">
         <a class="navbar-brand" href="#">XMR-BET</a>
@@ -25,8 +25,8 @@
       </div>
     </nav>
 
-    <div style="min-height: 80vh; display: flex; padding: 0;" class="container-fluid gy-2 gx-2">
-      <nav class="sidenav teal-background">
+    <div style="min-height: 80vh; display: flex; padding: 0; align-items: stretch;">
+      <nav class="sidenav white-background ">
         <ul>
           <li>Get started</li>
           <li>About</li>
@@ -116,14 +116,14 @@ $orange: #E9622C;
 $yellow: #F4F1BB;
 $teal: #9BC1BC;
 $black: #262730;
-$white: #E6EBE0;
+$white: #ebebeb;
 
 * {
   color: $black;
 }
 
 .sidenav {
-  height: 100%;
+
   width: 300px;
   padding-top: 64px;
   z-index: 9;
