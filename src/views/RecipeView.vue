@@ -1,32 +1,28 @@
 <template>
-  <div class="about">
-    <h1>Recipes</h1>
-    {{ latestRecipes }}
+  <div class="col-12">
+
+
   </div>
 </template>
 <script>
 import axios from 'axios'
 
 export default {
+  name: 'Recipe',
   data() {
     return {
-      latestRecipes: [],
+      recipe: []
     }
   },
   mounted() {
-    this.getLatestRecipes()
+    this.getRecipe()
   },
-  methods: {
-    getLatestRecipes: function(){
-      axios
-        .get('/api/v1/latest-recipes')
-        .then(response => {
-          this.latestRecipes = response.data
-        })
-        .catch(error => {
-          console.log(error)
-        })
+  methods:{
+    getRecipe: function(){
+      const recipe_slug = this.$route.params.recipe_slug;
+
     }
+
   }
 }
 </script>

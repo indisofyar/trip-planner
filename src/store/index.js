@@ -8,21 +8,49 @@ export default createStore({
     isAuthenticated: false,
     token: '',
     isLoading: false,
+    isPopup: false,
+    selectedPopup: null,
+    recipeDay: '',
+    settingDay: false,
+    toRefresh: false,
+    notification: '',
   },
   getters: {},
   mutations: {
-    initializeStore(state){
-      if(localStorage.getItem('cart')) {
-        state.JSON.parse(localStorage.getItem('cart'))
+    selectPopup(state, popup) {
+      if (popup) {
+        state.selectedPopup = popup
       } else {
-        state.JSON.parse(localStorage.setItem('cart'))
+        state.selectedPopup = null
       }
     },
-    addToCart(state,item){
-      const exists = state.cart.items.filter(i => i.product.id == item.product.id)
+    setNotification(state, notification) {
+      if (notification) {
+        state.notification = notification
+        setTimeout(() => {
+          state.notification = '';
+        }, "2000");
+      } else {
+        state.notification = ''
+      }
     },
-    setLoading(state,status){
+    setRecipeDay(state, day) {
+      if (day) {
+        state.recipeDay = day
+        state.settingDay = true
+      } else {
+        state.selectedPopup = ''
+      }
+    },
+    setLoading(state, status) {
       state.isLoading = status
+    },
+    refresh(state) {
+      state.toRefresh = true
+      setTimeout(() => {
+        state.toRefresh = false;
+      }, "1000");
+
     }
   },
   actions: {},

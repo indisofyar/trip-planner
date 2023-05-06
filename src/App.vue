@@ -1,104 +1,146 @@
 <template>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <div class="container p-1">
-      <a class="navbar-brand" href="#">Recipe Planner</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
-        aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNavDropdown">
-        <ul class="navbar-nav">
-          <li class="nav-item active">
-            <router-link to="/">Home</router-link> |
-          </li>
-          <li class="nav-item">
-            <router-link to="/recipes">Recipes</router-link>
+  <div :class="{ 'stop-moving': ($store.state.selectedPopup != null) }">
+    <nav class="navbar navbar-expand-lg navbar-dark black-background px-2"
+      style="position: fixed; width: 100%; z-index: 10; height: 64px;">
+      <div class="container-fluid p-1">
+        <a class="navbar-brand" href="#">XMR-BET</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+          aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+          <div style="position: relative;">
+            <i class="bi bi-search" style="position: absolute; left: 10px; top: 7px;"></i>
+            <input type="text" class="form-control" style="padding-left: 37px;" />
+          </div>
+        </div>
+        <div>
+          <button class="btn btn-primary me-2">
+            Login
+          </button>
+          <button class="btn btn-light" type="button">
+            Signup
+          </button>
+        </div>
+      </div>
+    </nav>
+
+    <div style="min-height: 80vh; display: flex; padding: 0;" class="container-fluid gy-2 gx-2">
+      <nav class="sidenav teal-background">
+        <ul>
+          <li>Get started</li>
+          <li>About</li>
+          <li v-for="category in categories">
+            {{ category.name }}
+            <ul>
+              <li v-for="subcategory in category.subcategories">{{ subcategory }}
+              </li>
+            </ul>
+
           </li>
         </ul>
+      </nav>
+      <div class="container" style="padding-top: 64px;">
+        <router-view />
       </div>
-      <div>
-        <button class="btn btn-primary me-2">
-          Login
-        </button>
-        <button class="btn btn-light" type="button">
-          Signup
-        </button>
+      <PopupGlobal v-if="$store.state.selectedPopup != null"></PopupGlobal>
+      <div style="width: 100%; display: flex; justify-content: center;" v-if="$store.state.loading == true">
+        <img src="./assets/loading.gif">
       </div>
-    </div>
-  </nav>
-  <div style="min-height: 80vh;" class="container py-5 gy-2 gx-2">
-    <router-view />
-    <div style="width: 100%; display: flex; justify-content: center;">
-      <lottie-player src="https://assets8.lottiefiles.com/packages/lf20_6yhhrbk6.json" background="transparent" speed="1"
-        style="width: 300px; height: 300px;" loop autoplay v-if="$store.state.isLoading"></lottie-player>
     </div>
   </div>
-  <!-- Site footer -->
-  <footer class="site-footer bg-dark">
-    <div class="container">
-      <div class="row">
-        <div class="col-sm-12 col-md-6">
-          <h6>About</h6>
-          <p class="text-justify">Scanfcode.com <i>CODE WANTS TO BE SIMPLE </i> is an initiative to help the upcoming
-            programmers with the code. Scanfcode focuses on providing the most efficient code or snippets as the code
-            wants to be simple. We will help programmers build up concepts in different programming languages that include
-            C, C++, Java, HTML, CSS, Bootstrap, JavaScript, PHP, Android, SQL and Algorithm.</p>
-        </div>
-
-        <div class="col-xs-6 col-md-3">
-          <h6>Categories</h6>
-          <ul class="footer-links">
-            <li><a href="http://scanfcode.com/category/c-language/">C</a></li>
-            <li><a href="http://scanfcode.com/category/front-end-development/">UI Design</a></li>
-            <li><a href="http://scanfcode.com/category/back-end-development/">PHP</a></li>
-            <li><a href="http://scanfcode.com/category/java-programming-language/">Java</a></li>
-            <li><a href="http://scanfcode.com/category/android/">Android</a></li>
-            <li><a href="http://scanfcode.com/category/templates/">Templates</a></li>
-          </ul>
-        </div>
-
-        <div class="col-xs-6 col-md-3">
-          <h6>Quick Links</h6>
-          <ul class="footer-links">
-            <li><a href="http://scanfcode.com/about/">About Us</a></li>
-            <li><a href="http://scanfcode.com/contact/">Contact Us</a></li>
-            <li><a href="http://scanfcode.com/contribute-at-scanfcode/">Contribute</a></li>
-            <li><a href="http://scanfcode.com/privacy-policy/">Privacy Policy</a></li>
-            <li><a href="http://scanfcode.com/sitemap/">Sitemap</a></li>
-          </ul>
-        </div>
-      </div>
-      <hr>
-    </div>
-    <div class="container">
-      <div class="row">
-        <div class="col-md-8 col-sm-6 col-xs-12">
-          <p class="copyright-text">Copyright &copy; 2017 All Rights Reserved by
-            <a href="#">Scanfcode</a>.
-          </p>
-        </div>
-
-        <div class="col-md-4 col-sm-6 col-xs-12">
-          <ul class="social-icons">
-            <li><a class="facebook" href="#"><i class="fa fa-facebook"></i></a></li>
-            <li><a class="twitter" href="#"><i class="fa fa-twitter"></i></a></li>
-            <li><a class="dribbble" href="#"><i class="fa fa-dribbble"></i></a></li>
-            <li><a class="linkedin" href="#"><i class="fa fa-linkedin"></i></a></li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </footer>
 </template>
 <script>
+import PopupGlobal from './components/PopupGlobal.vue';
+
 export default {
   mounted() {
-    document.title = 'Recipe Planner';
-  }
+    document.title = "XMR-BET";
+  },
+  data() {
+    return {
+      categories:
+        [
+          { name: 'Sports', subcategories: ['Soccer', 'Tennis'] },
+          { name: 'eSports', subcategories: ['League of Legends', 'Chess'] },
+          { name: 'Politics', subcategories: ['USA', 'Australia', 'UK', 'Global'] },
+        ],
+      events:
+        [
+          {
+            // Time left is a date object which returns the time when the event expires
+            name: 'World Chess Championship', timeLeft: new Date('2011-04-11T10:20:30Z'), description: 'The World Chess Championship 2023 is a chess match between Ian Nepomniachtchi and Ding Liren to determine the new World Chess Champion. ',
+            outcomes: [
+              { name: 'Ian Nepomniachtchi wins', volume: 453, payout: 1.73 },
+              { name: 'Ding Liren wins', volume: 320, payout: 2.1 },
+              { name: 'Draw', volume: 120, payout: 3.2 }
+            ]
+          },
+          {
+            // Time left is a date object which returns the time when the event expires
+            name: 'World Chess Championship', timeLeft: new Date('2011-04-11T10:20:30Z'), description: 'The World Chess Championship 2023 is a chess match between Ian Nepomniachtchi and Ding Liren to determine the new World Chess Champion. ',
+            outcomes: [
+              { name: 'Ian Nepomniachtchi wins', volume: 453, payout: 1.73 },
+              { name: 'Ding Liren wins', volume: 320, payout: 2.1 },
+              { name: 'Draw', volume: 120, payout: 3.2 }
+            ]
+          },
+          {
+            // Time left is a date object which returns the time when the event expires
+            name: 'World Chess Championship', timeLeft: new Date('2011-04-11T10:20:30Z'), description: 'The World Chess Championship 2023 is a chess match between Ian Nepomniachtchi and Ding Liren to determine the new World Chess Champion. ',
+            outcomes: [
+              { name: 'Ian Nepomniachtchi wins', volume: 453, payout: 1.73 },
+              { name: 'Ding Liren wins', volume: 320, payout: 2.1 },
+              { name: 'Draw', volume: 120, payout: 3.2 }
+            ]
+          }
+        ]
+    }
+  },
+  computed: {
+    notification() {
+      if (this.$store.state.notification != '') {
+        return this.$store.state.notification;
+      } else {
+        return false
+      }
+
+    }
+  },
+  components: { PopupGlobal },
 }
 </script>
 
 <style lang="scss">
+$orange: #E9622C;
+$yellow: #F4F1BB;
+$teal: #9BC1BC;
+$black: #262730;
+$white: #E6EBE0;
+
+* {
+  color: $black;
+}
+
+.sidenav {
+  height: 100%;
+  width: 300px;
+  padding-top: 64px;
+  z-index: 9;
+  min-height: 100vh;
+
+  ul {
+
+    list-style-type: none;
+    padding: 15px;
+  }
+}
+
+.stop-moving {
+  overflow: hidden;
+  height: 100vh;
+}
+
 .heading_small {
   font-size: 22px;
 }
@@ -270,4 +312,42 @@ export default {
     margin-right: 0;
     font-weight: 600
   }
-}</style>
+}
+
+
+.teal-background {
+  background-color: $teal;
+}
+
+.black-background {
+  background-color: $black;
+}
+
+.yellow-background {
+  background-color: $yellow;
+}
+
+.white-background {
+  background-color: $white;
+}
+
+.teal-text {
+  color: $teal;
+}
+
+.black-text {
+  color: $black;
+}
+
+.yellow-text {
+  color: $yellow;
+}
+
+.white-text {
+  color: $white;
+}
+
+.teal-text {
+  color: $teal;
+}
+</style>
