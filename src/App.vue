@@ -15,12 +15,16 @@
           </div>
         </div>
         <div>
-          <button class="btn btn-primary me-2">
-            <router-link :to="{name:'login'}">Login</router-link>
-          </button>
-          <button class="btn btn-light" type="button">
-            Signup
-          </button>
+          <router-link :to="{ name: 'login' }">
+            <button class="btn btn-primary me-2">
+              Login
+            </button>
+          </router-link>
+          <router-link :to="{ name: 'sign-up' }">
+            <button class="btn btn-light" type="button">
+              Sign up
+            </button>
+          </router-link>
         </div>
       </div>
     </nav>
@@ -29,9 +33,9 @@
       <nav class="sidenav white-background ">
         <div class="sidenav-inner">
           <ul>
-            <li><router-link :to="{name:'home'}">Home</router-link></li>
-            <li><router-link :to="{name:'getting-started'}">Getting started</router-link></li>
-            <li><router-link :to="{name:'about'}">About</router-link></li>
+            <li><router-link :to="{ name: 'home' }">Home</router-link></li>
+            <li><router-link :to="{ name: 'getting-started' }">Getting started</router-link></li>
+            <li><router-link :to="{ name: 'about' }">About</router-link></li>
           </ul>
           <ul>
             <li v-for="category in categories">
@@ -134,17 +138,19 @@ $white: #ebebeb;
   z-index: 9;
   min-height: 100vh;
 
-  .sidenav-inner{
+  .sidenav-inner {
     padding: 25px;
   }
+
   ul {
     padding: 0;
     margin-left: 15px;
     list-style-type: none;
 
   }
-  li{
-    &:hover{
+
+  li {
+    &:hover {
       text-decoration: underline;
     }
   }

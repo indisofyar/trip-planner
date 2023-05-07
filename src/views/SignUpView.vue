@@ -5,19 +5,28 @@
       <img src="../assets/logo.svg" style="width: 50px; height: 50px; margin-bottom: 20px;"/>
     </div>
     <div style="width: 300px; display: flex; flex-direction: column; padding-bottom: 90px;">
-      <h1 class="text-center" style="font-size: 30px; margin-bottom: 20px;">Welcome back</h1>
+      <h1 class="text-center" style="font-size: 30px; margin-bottom: 20px;">Sign up</h1>
       <div style="position: relative; margin-bottom: 10px;">
         <input type="text" class="inputText form-control w-100" required />
-        <span class="floating-label">Email or username</span>
+        <span class="floating-label">Username</span>
       </div>
       <div style="position: relative; margin-bottom: 10px;">
-        <input type="password" class="inputText form-control w-100" required id="passwordField"/>
-        <span class="floating-label">Password</span>
-        <i class="bi " style="position: absolute; right: 18px; top: 8px; font-size: 20px;" @click="togglePassword" :class="{'bi-eye-fill' : showPassword, 'bi-eye-slash-fill' : !showPassword}"></i>
+        <input type="text" class="inputText form-control w-100" required />
+        <span class="floating-label">Email <span class="text-secondary">(optional)</span></span>
       </div>
-      <span style="font-size: 12px; margin-bottom: 20px;"><a href="#">Forgot password?</a></span>
-      <button class="btn btn-primary expanded w-100 h-45" style="margin-bottom: 10px;">Login</button>
-      <span class="text-center">Don't have an account? <RouterLink to="/sign-up">Sign up</RouterLink></span>
+    
+      <div style="position: relative; margin-bottom: 10px;">
+        <input type="password" class="inputText form-control w-100" required id="passwordField" v-model="password"/>
+        <span class="floating-label">Password</span>
+        <i class="bi " style="position: absolute; right: 18px; top: 8px; font-size: 20px;" @click="togglePassword" :class="{'bi-eye-fill' : showPassword, 'bi-eye-slash-fill' : !showPassword}" ></i>
+      </div>
+      <div style="position: relative; margin-bottom: 5px;">
+        <input type="password" class="inputText form-control w-100" required id="passwordFieldTwo"/>
+        <span class="floating-label">Confirm password</span>
+      </div>
+      <span style="font-size: 12px;" :class="{'text-success' : isValidPassword}">Must be more than 8 characters</span>
+      <button class="btn btn-primary expanded w-100 h-45" style="margin-bottom: 10px; margin-top: 30px;">Sign up</button>
+      <span class="text-center">Already have an account? <RouterLink to="/login">Log in</RouterLink></span>
     </div>
     <div>
       <RouterLink :to="{ name: about }">About</RouterLink> |
@@ -32,15 +41,23 @@ export default {
   data(){
     return{
       showPassword: false,
+      password: "",
+    }
+  },
+  computed:{
+    isValidPassword(){
+      return this.password.length > 8;
     }
   },  
   methods:{
     togglePassword(){
       if (document.getElementById("passwordField").type == "password"){
         document.getElementById("passwordField").type = "text";
+        document.getElementById("passwordFieldTwo").type = "text";
         this.showPassword = true;
       }else{
         document.getElementById("passwordField").type = "password";
+        document.getElementById("passwordFieldTwo").type = "password";
         this.showPassword = false;
       }
     }
