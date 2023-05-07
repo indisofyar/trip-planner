@@ -16,7 +16,7 @@
         </div>
         <div>
           <button class="btn btn-primary me-2">
-            Login
+            <router-link :to="{name:'login'}">Login</router-link>
           </button>
           <button class="btn btn-light" type="button">
             Signup
@@ -27,18 +27,23 @@
 
     <div style="min-height: 80vh; display: flex; padding: 0; align-items: stretch;">
       <nav class="sidenav white-background ">
-        <ul>
-          <li>Get started</li>
-          <li>About</li>
-          <li v-for="category in categories">
-            {{ category.name }}
-            <ul>
-              <li v-for="subcategory in category.subcategories">{{ subcategory }}
-              </li>
-            </ul>
-
-          </li>
-        </ul>
+        <div class="sidenav-inner">
+          <ul>
+            <li><router-link :to="{name:'home'}">Home</router-link></li>
+            <li><router-link :to="{name:'getting-started'}">Getting started</router-link></li>
+            <li><router-link :to="{name:'about'}">About</router-link></li>
+          </ul>
+          <ul>
+            <li v-for="category in categories">
+              <a href="#">{{ category.name }}</a>
+              <ul>
+                <li v-for="subcategory in category.subcategories">
+                  <a href="#">{{ subcategory }}</a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
       </nav>
       <div class="container" style="padding-top: 64px;">
         <router-view />
@@ -129,10 +134,19 @@ $white: #ebebeb;
   z-index: 9;
   min-height: 100vh;
 
+  .sidenav-inner{
+    padding: 25px;
+  }
   ul {
-
+    padding: 0;
+    margin-left: 15px;
     list-style-type: none;
-    padding: 15px;
+
+  }
+  li{
+    &:hover{
+      text-decoration: underline;
+    }
   }
 }
 
@@ -349,5 +363,29 @@ $white: #ebebeb;
 
 .teal-text {
   color: $teal;
+}
+
+.event-card {
+  border: 1px solid #cdcdcd;
+  border-radius: 8px;
+  padding: 18px 36px;
+  position: relative;
+  transition: 0.5s ease;
+
+  &:hover {
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
+  }
+
+  h2 {
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 12px;
+  }
+
+  .time-left {
+    position: absolute;
+    top: 18px;
+    right: 36px;
+  }
 }
 </style>

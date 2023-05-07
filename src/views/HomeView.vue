@@ -1,7 +1,5 @@
 <template>
   <section>
-
-
     <div class="row gy-2 pt-3" style="display: flex; justify-content: center;">
       <div class="col-8">
         {{ category }} > {{ subcategory }}
@@ -12,7 +10,7 @@
       <div class="col-8 event-card" v-for="event in events">
         <h2>{{ event.name }}</h2>
         <p>{{ event.description }}</p>
-        
+
         <div class="time-left" :id="String('timeLeft' + event.id)" :ref="timeLeft + event.id"></div>
         <table class="table">
           <thead>
@@ -29,7 +27,7 @@
               <td>${{ outcome.volume }}</td>
               <td>{{ outcome.payout }}</td>
               <td>
-                <button class="btn btn-primary">Bet</button>
+                <button class="btn btn-primary" @click="$store.commit('selectPopup', 'MakeBet');">Bet</button>
               </td>
             </tr>
           </tbody>
@@ -96,7 +94,7 @@ export default {
           },
           {
             // Time left is a date object which returns the time when the event expires
-            name: 'World Chess Championship', expiryDate: new Date('2023-05-11T10:20:30Z'), id: 2,description: 'The World Chess Championship 2023 is a chess match between Ian Nepomniachtchi and Ding Liren to determine the new World Chess Champion. ',
+            name: 'World Chess Championship', expiryDate: new Date('2023-05-11T10:20:30Z'), id: 2, description: 'The World Chess Championship 2023 is a chess match between Ian Nepomniachtchi and Ding Liren to determine the new World Chess Champion. ',
             outcomes: [
               { name: 'Ian Nepomniachtchi wins', volume: 453, payout: 1.73 },
               { name: 'Ding Liren wins', volume: 320, payout: 2.1 },
@@ -105,7 +103,7 @@ export default {
           },
           {
             // Time left is a date object which returns the time when the event expires
-            name: 'World Chess Championship', expiryDate: new Date('2023-05-11T10:20:30Z'), id:3, description: 'The World Chess Championship 2023 is a chess match between Ian Nepomniachtchi and Ding Liren to determine the new World Chess Champion. ',
+            name: 'World Chess Championship', expiryDate: new Date('2023-05-11T10:20:30Z'), id: 3, description: 'The World Chess Championship 2023 is a chess match between Ian Nepomniachtchi and Ding Liren to determine the new World Chess Champion. ',
             outcomes: [
               { name: 'Ian Nepomniachtchi wins', volume: 453, payout: 1.73 },
               { name: 'Ding Liren wins', volume: 320, payout: 2.1 },
@@ -115,12 +113,9 @@ export default {
         ]
     }
   },
-  mounted(){
-    nextTick(() => {
-      this.events.forEach(event => {
-        console.log(document.getElementById(String('timeLeft' + event.id)))
-        this.timeLeft(event.expiryDate, event.id)
-      });
+  mounted() {
+    this.events.forEach(event => {
+      this.timeLeft(event.expiryDate, event.id)
     });
   }
 }

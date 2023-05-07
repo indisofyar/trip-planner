@@ -20,9 +20,7 @@ export default {
   methods:{
     getRecipe: function(){
       const recipe_slug = this.$route.params.recipe_slug;
-
     }
-
   }
 }
 </script>
