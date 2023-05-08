@@ -2,25 +2,39 @@
   <div :class="{ 'stop-moving': ($store.state.selectedPopup != null) }">
     <nav class="navbar navbar-expand-lg black-background navbar-dark px-2"
       style="position: fixed; width: 100%; z-index: 10; height: 64px;">
-      <div class="container-fluid p-1">
-        <a class="navbar-brand" href="#">XMR-BET</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
-          aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
+      <div class="container-fluid p-0" style="position: relative; display: flex; flex-wrap: nowrap;">
+        <button v-if="showSearch" class="btn nav-bar-button" @click="showSearch = false">
+          <i class="bi bi-x"></i>
         </button>
-        <div class="collapse navbar-collapse" id="navbarNavDropdown">
-          <div style="position: relative;">
-            <i class="bi bi-search" style="position: absolute; left: 10px; top: 7px;"></i>
-            <input type="text" class="form-control" style="padding-left: 37px;" />
+        <div class="nav-bar-left" style="width: 300px; display: flex; align-items: center;" v-if="!showSearch">
+          <button class="btn nav-bar-button" v-if="!screenBig && !showSearch" @click="showSidenav = true" style="margin-right: 10px;">
+            <i class="bi bi-list"></i>
+          </button>
+          <router-link to='/'><img src="@/assets/logo.svg" style="height: 35px; margin-right: 10px;"/></router-link>
+          <router-link to='/' v-if="screenBig" style="font-size: 26px; text-decoration: none; font-weight: 700; color: white;">XMR-BET</router-link>
+          
+          <button class="btn nav-bar-button" v-if="!screenBig && !showSearch" @click="showSearch = true">
+            <i class="bi bi-search"></i>
+          </button>
+        </div>
+        <div class="nav-bar-middle container" style="display: flex; justify-content: center;">
+          <div style="display: flex; justify-content: space-between;" :class="{ 'col-8': screenBig }">
+
+            <div style="position: relative;" v-if="screenBig || showSearch">
+              <i class="bi bi-search" style="position: absolute; left: 12px; top: 7px;"></i>
+              <input type="text" class="form-control search-input" style="padding-left: 37px;"
+                placeholder="Search XMR-Bet" />
+            </div>
+
           </div>
         </div>
-        <div>
+        <div style="position: absolute; right: 0;" v-if="!showSearch">
           <router-link :to="{ name: 'login' }">
             <button class="btn btn-primary me-2">
               Login
             </button>
           </router-link>
-          <router-link :to="{ name: 'sign-up' }">
+          <router-link :to="{ name: 'sign-up' }" v-if="screenBig">
             <button class="btn btn-light" type="button">
               Sign up
             </button>
@@ -30,8 +44,11 @@
     </nav>
 
     <div style="min-height: 80vh; display: flex; padding: 0; align-items: stretch;">
-      <nav class="sidenav white-background ">
+      <nav class="sidenav" v-if="showSidenav || screenBig">
         <div class="sidenav-inner">
+          <button v-if="showSidenav" class="btn nav-bar-button" @click="showSidenav = false" style="position: fixed; top: 10px; right: 10px; background: black; color: white;">
+            <i class="bi bi-x"></i>
+          </button>
           <ul>
             <li><router-link :to="{ name: 'home' }">Home</router-link></li>
             <li><router-link :to="{ name: 'getting-started' }">Getting started</router-link></li>
@@ -49,7 +66,7 @@
           </ul>
         </div>
       </nav>
-      <div class="container" style="padding-top: 64px;">
+      <div class="container" style="padding: 64px 16px 16px 16px">
         <router-view />
       </div>
       <PopupGlobal v-if="$store.state.selectedPopup != null"></PopupGlobal>
@@ -65,9 +82,24 @@ import PopupGlobal from './components/PopupGlobal.vue';
 export default {
   mounted() {
     document.title = "XMR-BET";
+    if (window.matchMedia('(max-width: 992px)').matches) {
+      this.screenBig = false;
+    } else {
+      this.screenBig = true;
+    }
+    window.addEventListener('resize', function () {
+      if (window.matchMedia('(max-width: 992px)').matches) {
+        this.screenBig = false;
+      } else {
+        this.screenBig = true;
+      }
+    }.bind(this));
   },
   data() {
     return {
+      screenBig: false,
+      showSearch: false,
+      showSidenav: false,
       categories:
         [
           { name: 'Sports', subcategories: ['Soccer', 'Tennis'] },
@@ -121,277 +153,5 @@ export default {
 </script>
 
 <style lang="scss">
-$orange: #E9622C;
-$yellow: #F4F1BB;
-$teal: #9BC1BC;
-$black: #262730;
-$white: #ebebeb;
-
-* {
-  color: $black;
-}
-
-.sidenav {
-
-  width: 300px;
-  padding-top: 64px;
-  z-index: 9;
-  min-height: 100vh;
-
-  .sidenav-inner {
-    padding: 25px;
-  }
-
-  ul {
-    padding: 0;
-    margin-left: 15px;
-    list-style-type: none;
-
-  }
-
-  li {
-    &:hover {
-      text-decoration: underline;
-    }
-  }
-}
-
-.stop-moving {
-  overflow: hidden;
-  height: 100vh;
-}
-
-.heading_small {
-  font-size: 22px;
-}
-
-.error {
-  color: rgb(145, 33, 33);
-}
-
-.site-footer {
-  padding: 45px 0 20px;
-  font-size: 15px;
-  line-height: 24px;
-  color: #737373;
-}
-
-.site-footer hr {
-  border-top-color: #bbb;
-  opacity: 0.5
-}
-
-.site-footer hr.small {
-  margin: 20px 0
-}
-
-.site-footer h6 {
-  color: #fff;
-  font-size: 16px;
-  text-transform: uppercase;
-  margin-top: 5px;
-  letter-spacing: 2px
-}
-
-.site-footer a {
-  color: #737373;
-}
-
-.site-footer a:hover {
-  color: #3366cc;
-  text-decoration: none;
-}
-
-.footer-links {
-  padding-left: 0;
-  list-style: none
-}
-
-.footer-links li {
-  display: block
-}
-
-.footer-links a {
-  color: #737373
-}
-
-.footer-links a:active,
-.footer-links a:focus,
-.footer-links a:hover {
-  color: #3366cc;
-  text-decoration: none;
-}
-
-.footer-links.inline li {
-  display: inline-block
-}
-
-.site-footer .social-icons {
-  text-align: right
-}
-
-.site-footer .social-icons a {
-  width: 40px;
-  height: 40px;
-  line-height: 40px;
-  margin-left: 6px;
-  margin-right: 0;
-  border-radius: 100%;
-  background-color: #33353d
-}
-
-.copyright-text {
-  margin: 0
-}
-
-@media (max-width:991px) {
-  .site-footer [class^=col-] {
-    margin-bottom: 30px
-  }
-}
-
-@media (max-width:767px) {
-  .site-footer {
-    padding-bottom: 0
-  }
-
-  .site-footer .copyright-text,
-  .site-footer .social-icons {
-    text-align: center
-  }
-}
-
-.social-icons {
-  padding-left: 0;
-  margin-bottom: 0;
-  list-style: none
-}
-
-.social-icons li {
-  display: inline-block;
-  margin-bottom: 4px
-}
-
-.social-icons li.title {
-  margin-right: 15px;
-  text-transform: uppercase;
-  color: #96a2b2;
-  font-weight: 700;
-  font-size: 13px
-}
-
-.social-icons a {
-  background-color: #eceeef;
-  color: #818a91;
-  font-size: 16px;
-  display: inline-block;
-  line-height: 44px;
-  width: 44px;
-  height: 44px;
-  text-align: center;
-  margin-right: 8px;
-  border-radius: 100%;
-  -webkit-transition: all .2s linear;
-  -o-transition: all .2s linear;
-  transition: all .2s linear
-}
-
-.social-icons a:active,
-.social-icons a:focus,
-.social-icons a:hover {
-  color: #fff;
-  background-color: #29aafe
-}
-
-.social-icons.size-sm a {
-  line-height: 34px;
-  height: 34px;
-  width: 34px;
-  font-size: 14px
-}
-
-.social-icons a.facebook:hover {
-  background-color: #3b5998
-}
-
-.social-icons a.twitter:hover {
-  background-color: #00aced
-}
-
-.social-icons a.linkedin:hover {
-  background-color: #007bb6
-}
-
-.social-icons a.dribbble:hover {
-  background-color: #ea4c89
-}
-
-@media (max-width:767px) {
-  .social-icons li.title {
-    display: block;
-    margin-right: 0;
-    font-weight: 600
-  }
-}
-
-
-.teal-background {
-  background-color: $teal;
-}
-
-.black-background {
-  background-color: $black;
-}
-
-.yellow-background {
-  background-color: $yellow;
-}
-
-.white-background {
-  background-color: $white;
-}
-
-.teal-text {
-  color: $teal;
-}
-
-.black-text {
-  color: $black;
-}
-
-.yellow-text {
-  color: $yellow;
-}
-
-.white-text {
-  color: $white;
-}
-
-.teal-text {
-  color: $teal;
-}
-
-.event-card {
-  border: 1px solid #cdcdcd;
-  border-radius: 8px;
-  padding: 18px 36px;
-  position: relative;
-  transition: 0.5s ease;
-
-  &:hover {
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
-  }
-
-  h2 {
-    font-size: 24px;
-    font-weight: 600;
-    margin-bottom: 12px;
-  }
-
-  .time-left {
-    position: absolute;
-    top: 18px;
-    right: 36px;
-  }
-}
+@import "@/assets/scss/_global.scss";
 </style>

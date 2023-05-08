@@ -1,3 +1,10 @@
+$orange: #E9622C;
+$yellow: #F4F1BB;
+$teal: #9BC1BC;
+$black: #262730;
+$white: #ebebeb;
+$gray: #eee;
+
 $breakpoints: (
   xs: 576px,
   sm: 768px,
@@ -5,16 +12,6 @@ $breakpoints: (
   lg: 1200px
 );
 
-$orange: #E9622C;
-$yellow: #F4F1BB;
-$teal: #9BC1BC;
-$black: #262730;
-$white: #E6EBE0;
-
-
-.teal-background{
-  background-color: $teal;
-}
 
 //
 //  RESPOND ABOVE
@@ -113,3 +110,5 @@ $white: #E6EBE0;
     }
   }
 }
+
+

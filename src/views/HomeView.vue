@@ -1,13 +1,13 @@
 <template>
   <section>
     <div class="row gy-2 pt-3" style="display: flex; justify-content: center;">
-      <div class="col-8">
+      <div class="col-md-8">
         {{ category }} > {{ subcategory }}
       </div>
       <div id="demo">
 
       </div>
-      <div class="col-8 event-card" v-for="event in events">
+      <div class="col-md-8 event-card" v-for="event in events">
         <h2>{{ event.name }}</h2>
         <p>{{ event.description }}</p>
 
@@ -122,27 +122,5 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.event-card {
-  border: 1px solid #cdcdcd;
-  border-radius: 8px;
-  padding: 18px 36px;
-  position: relative;
-  transition: 0.5s ease;
 
-  &:hover {
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
-  }
-
-  h2 {
-    font-size: 24px;
-    font-weight: 600;
-    margin-bottom: 12px;
-  }
-
-  .time-left {
-    position: absolute;
-    top: 18px;
-    right: 36px;
-  }
-}
 </style>

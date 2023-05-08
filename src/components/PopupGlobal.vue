@@ -4,7 +4,7 @@
     </div>
     <div class="container my-auto position-relative" @click="stopPro" style="z-index:1">
       <div class="row p-4" style="display: flex; justify-content: center;">
-        <div class="col-8  bg-light" v-if="$store.state.selectedPopup == 'MakeBet'">
+        <div class="col-8 bg-light popup-inner" v-if="$store.state.selectedPopup == 'MakeBet'">
           <MakeBet/>
         </div>
         <div class="col-12" v-if="$store.state.selectedPopup == 'SelectRecipe'">
@@ -42,6 +42,10 @@ export default {
   background-color: rgba(0, 0, 0, 0.5);
   z-index: 100;
   overflow: scroll;
+  .popup-inner{
+    border-radius: 4px;
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.15);
+  }
 
 }
 </style>
