@@ -11,7 +11,7 @@
             <i class="bi bi-list"></i>
           </button>
           <router-link to='/'><img src="@/assets/logo.svg" style="height: 35px; margin-right: 10px;"/></router-link>
-          <router-link to='/' v-if="screenBig" style="font-size: 26px; text-decoration: none; font-weight: 700; color: white;">XMR-BET</router-link>
+          <router-link to='/' v-if="screenBig" style="font-size: 22px; text-decoration: none; font-weight: 700; color: white;">XMR-BET</router-link>
           
           <button class="btn nav-bar-button" v-if="!screenBig && !showSearch" @click="showSearch = true">
             <i class="bi bi-search"></i>
