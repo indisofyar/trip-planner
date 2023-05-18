@@ -1,7 +1,8 @@
 {
   "projects": {
     "default": "recipe-app-frontend-92d44",
-    "monero-trading-app": "monero-trading-app"
+    "monero-trading-app": "monero-trading-app",
+    "trip-planner": "trip-planner-702f1"
   },
   "targets": {},
   "etags": {}
