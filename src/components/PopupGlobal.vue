@@ -8,20 +8,20 @@
           <MakeBet/>
         </div>
         <div class="col-12" v-if="$store.state.selectedPopup == 'SelectRecipe'">
-          <RecipeListView :select-recipe="true"/>
+          
         </div>
       </div>
     </div>
   </div>
 </template>
 <script>
-import RecipeListView from '@/views/RecipeListView.vue';
+
 import AddRecipe from './popups/AddRecipe.vue';
 import MakeBet from './popups/MakeBet.vue';
 
 export default {
     name: "PopupGlobal",
-    components: { AddRecipe, RecipeListView, MakeBet },
+    components: { AddRecipe,  MakeBet },
     methods: {
         closePopup() {
             this.$store.commit('state.setSelectedPopup', null);

@@ -1,16 +1,6 @@
 <template>
-    <div style="background-color: white; width: 100%; height: 125px; display: flex;" v-if="!deleted">
-        <img :src="recipe.get_image" style="width: 125px; height: 125px; object-fit: cover; margin-right: 15px;">
-        <div>
-                        <h2>{{ recipe.name }}</h2>
-            <div class="mb-2">
-                <span>{{ recipe.time }}</span> <span v-if="recipe.serves">Serves {{ recipe.serves }}</span> <a :href="recipe.url" v-if="recipe.url">External link</a>
-               
-            </div>
-            <button v-if="$store.state.settingDay" class="btn btn-success me-1" @click="setRecipe">select</button>
-            <button class="btn btn-outline-secondary me-1">View recipe</button>
-            <button class="btn btn-outline-danger" @click="deleteRecipe">Delete recipe</button>
-        </div>
+    <div class="col-md-8 offset-md-2 card mb-5">
+        <slot></slot>
     </div>
    
 </template>

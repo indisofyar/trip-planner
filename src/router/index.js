@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from "vue-router";
-import HomeView from "../views/HomeView.vue";
+import HomeView from "../views/Home.vue";
 
 const routes = [
   {
@@ -8,28 +8,34 @@ const routes = [
     component: HomeView,
   },
   {
-    path: "/about",
-    name: "about",
+    path: "/get-started",
+    name: "get-started",
     component: () =>
-      import("../views/AboutView.vue"),
+      import("../views/GettingStarted.vue"),
   },
   {
-    path: "/getting-started",
-    name: "getting-started",
+    path: "/plan-trip",
+    name: "plan-trip",
     component: () =>
-      import("../views/GettingStartedView.vue"),
+      import("../views/PlanTrip.vue"),
+  },
+  {
+    path: "/plan-trip/1",
+    name: "plan-trip-1",
+    component: () =>
+      import("../views/TripQuiz.vue"),
   },
   {
     path: "/login",
     name: "login",
     component: () =>
-      import("../views/LoginView.vue"),
+      import("../views/Login.vue"),
   },
   {
     path: "/sign-up",
     name: "sign-up",
     component: () =>
-      import("../views/SignUpView.vue"),
+      import("../views/SignUp.vue"),
   },
 ];
 

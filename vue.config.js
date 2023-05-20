@@ -21,4 +21,11 @@ module.exports = defineConfig({
       ],
     },
   },
+  chainWebpack: (config) => {
+    config.plugins.delete("preload");
+    config.plugin("html").tap((args) => {
+      args[0].cache = true;
+      return args;
+    });
+  },
 });
