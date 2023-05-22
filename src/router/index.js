@@ -37,6 +37,11 @@ const routes = [
     component: () =>
       import("../views/SignUp.vue"),
   },
+  {
+    path: "/:notFound",
+    component: () =>
+      import("../views/NotFound.vue"),
+  },
 ];
 
 const router = createRouter({

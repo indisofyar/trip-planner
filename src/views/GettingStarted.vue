@@ -20,36 +20,25 @@
   Plugins:
     - @tailwindcss/forms
 -->
+                <form  v-if="!submitted" @submit.prevent
+                  action="https://hooks.airtable.com/workflows/v1/genericWebhook/appRtc6XjilxYXv7w/wfl13chRTV4ViSdQ3/wtroMbUGo9GvmK8cJ"
+                  method="POST">
+                  <br>
+                  <label for="fname">Name</label><br>
+                  <input type="text" id="fname" name="fname" ><br>
+                  <label for="email">Email</label><br>
+                  <input type="email" id="email" name="email" ><br><br>
+                  <input type="date" id="date" name="date"  class="hidden" v-model="todaysDate">
+                  <input type="submit" value="Join our mailing list" @click="submitted = true"
+                  class="block w-full mt-4 rounded-full bg-blue-600 px-12 py-3 text-sm font-medium text-white shadow hover:bg-blue-600 focus:outline-none focus:ring active:bg-blue-500 sm:w-auto">
+                </form>
 
-                <div class="mt-5">
-                  <label for="name" class="block text-sm font-medium text-gray-700">
-                    Name
-                  </label>
-
-                  <input type="email" id="name" placeholder="Name"
-                    class="mt-1 w-full rounded-md border-gray-200 shadow-sm sm:text-sm p-1 " />
-                </div>
-                <div class="mt-3">
-                  <label for="UserEmail" class="block text-sm font-medium text-gray-700">
-                    Email
-                  </label>
-
-                  <input type="email" id="UserEmail" placeholder="john@rhcp.com"
-                    class="mt-1 w-full rounded-md border-gray-200 shadow-sm sm:text-sm p-1 " />
-                </div>
-                <div class="flex justify-end mt-10">
-                  <button
-                    class="block w-full mt-4 rounded-full bg-blue-600 px-12 py-3 text-sm font-medium text-white shadow hover:bg-blue-600 focus:outline-none focus:ring active:bg-blue-500 sm:w-auto">
-                    Join mailing list
-                  </button>
-                </div>
-
+                <p v-else><br><br>
+                  Thanks for joining the mailing list, you're a superstar ⭐️
+                </p>
               </div>
-
-
             </div>
           </div>
-
         </div>
       </div>
     </section>
@@ -57,8 +46,27 @@
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
   name: "AboutView",
+  data() {
+    return {
+      name: '',
+      email: '',
+      submitted : false,
+    }
+  },
+  computed: {
+    todaysDate() {
+      return new Date().toISOString().slice(0, 10)
+    }
+  },
+  methods: {
+    redirect() {
+      this.$router.push({ name: 'Home' })
+    }
+  }
 }
 </script>
 

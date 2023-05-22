@@ -1,7 +1,12 @@
 <template>
-  <section class="relative  bg-cover bg-center bg-no-repeat"
-    style="background-image: url('https://images.unsplash.com/photo-1558102822-da570eb113ed?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2670&q=80');">
- 
+  <section class="relative  bg-cover bg-center bg-no-repeat">
+
+    <img src="../assets/photo-1558102822-da570eb113ed_n8tlul_c_scale,w_1400.avif" v-if="isMobile == false" alt=""
+      class="absolute w-full h-full object-cover">
+    <img src="../assets/photo-1558102822-da570eb113ed_n8tlul_c_scale,w_200.avif" v-else alt="" 
+      class="absolute w-full h-full object-cover">
+
+
     <div
       class="absolute inset-0 bg-white/25 sm:bg-transparent sm:from-white/95 sm:to-white/25 ltr:sm:bg-gradient-to-r rtl:sm:bg-gradient-to-l">
     </div>
@@ -266,7 +271,7 @@
       </strong>
 
       <a class="inline-flex items-center gap-2 rounded-full border border-white bg-white px-8 py-3 text-blue-600 hover:bg-transparent hover:text-white focus:outline-none focus:ring active:bg-white/90"
-        href="/">
+        href="/get-started">
         <span class="text-sm font-medium"> Get Started </span>
 
         <svg class="h-5 w-5 rtl:rotate-180" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
@@ -286,6 +291,25 @@ import { nextTick } from 'vue';
 
 export default {
   name: "HomeView",
+  data() {
+    return {
+      isMobile: false
+    }
+  },
+  mounted() {
+    this.handleResize();
+    window.addEventListener('resize', this.handleResize);
+  },
+  methods: {
+    handleResize() {
+    
+      if (window.innerWidth < 768) {
+        this.isMobile = true;
+      } else {
+        this.isMobile = false;
+      }
+    }
+  }
 }
 </script>
 

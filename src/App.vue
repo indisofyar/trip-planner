@@ -5,7 +5,7 @@
         <div class="flex items-center justify-between gap-4 lg:gap-10">
           <div class="flex lg:w-0 lg:flex-1">
             <RouterLink to="/">
-              <span class="font-bold text-xl text-white">TripGenius</span>
+              <span class="font-bold text-xl text-white">ExploreWizard</span>
             </RouterLink>
   
           </div>
@@ -349,7 +349,7 @@
 
         <div class="mt-16 sm:flex sm:items-center sm:justify-between">
           <div class="flex justify-center text-blue-600 sm:justify-start">
-            <span class="font-bold text-xl">TripGenius</span>
+            <span class="font-bold text-xl">ExploreWizard</span>
           </div>
 
           <p class="mt-4 text-center text-sm text-gray-500 sm:mt-0 sm:text-right">
@@ -365,7 +365,7 @@ import PopupGlobal from './components/PopupGlobal.vue';
 
 export default {
   mounted() {
-    document.title = "Trip Genius";
+    document.title = "ExploreWizard";
     if (window.matchMedia('(max-width: 992px)').matches) {
       this.screenBig = false;
     } else {
